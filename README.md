@@ -18,19 +18,57 @@ In order to make this project run you will need to install on your computer :
 - socket (https://socket.io/)
 - johnny-five (http://johnny-five.io/)
 
+### Steps
+
 The project is based on the clmtrackr javascript library.
 https://github.com/auduno/clmtrackr
 
 You can directly use the modified files presented here.
 
-
-
+The datas of the face tracking are stored in ```(er).``` 
+You can give it an other value in this part : 
 
 ```
-Give the example
+function faceFound(data) {
+	console.log(data);
+
+	if (data[7].value > 0.5){
+		text = 'Hello mister';
+	} else {
+		text = 'Hello lady';
+	}
+	console.log(text);
+	speak(text);
+}
+
 ```
 
-Now you need to set your aruino equipment like so :
+Then, I added the javascript code of a Web Speech Synthesis Demo : https://codepen.io/matt-west/pen/wGzuJ
+Once again, I added that in the same html file (which is a bit messy). 
+
+You can make the computer read a sentence by calling the speak function.
+
+```
+text ='Type here anything you want'
+speak(text);
+
+```
+
+
+You can also modify some settings :
+
+```
+msg.volume = 1;
+msg.rate = 1;
+msg.pitch = 1;
+
+```
+
+
+
+
+
+Now you need to set your arduino equipment like so :
 
 ![Image arduino installation](https://www.carnetdumaker.net/uploads/img_attachments/large/sonar_arduino_bb.jpg)
 
@@ -55,12 +93,12 @@ The setTimeout function :
 
 ```
 document.addEventListener('DOMContentLoaded', function() {
-					setTimeout(function(){
-				   text = 'Oh, you are here ?! Welcome.';
-					 console.log(text);
-					 speak(text);
-				 },1000);
-				}, false);
+setTimeout(function(){
+	 text = 'Oh, you are here ?! Welcome.';
+	 console.log(text);
+	 speak(text);
+},1000);
+}, false);
 ```
 In this part I needed to have a setTimeout function because I wanted to make the computer speak as soon as the page was loaded. Since there is a lot of thing to load on the page, it wasn't working. Putting a setTimeout function allowed to make sure everything had the time to load before the computer starts speaking. 
 
