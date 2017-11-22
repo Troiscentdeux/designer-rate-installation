@@ -10,84 +10,75 @@ Material you will need :
 - 4 arduino cables
 - an ultrasonic arduino sensor
 
+### Installing
+
 In order to make this project run you will need to install on your computer : 
 - node.js (https://nodejs.org/en/)
 - the arduino software (https://www.arduino.cc/en/Guide/Windows)
+- socket (https://socket.io/)
 - johnny-five (http://johnny-five.io/)
 
+The project is based on the clmtrackr javascript library.
+https://github.com/auduno/clmtrackr
 
-```
-Give examples
-```
+You can directly use the modified files presented here.
 
-### Installing
 
-A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
 
 ```
 Give the example
 ```
 
-And repeat
+Now you need to set your aruino equipment like so :
+
+![Image arduino installation](https://www.carnetdumaker.net/uploads/img_attachments/large/sonar_arduino_bb.jpg)
+
+In order to connect your arduino board and sensor to your webpage, you need to run a server. 
+First, open the arduino interface and launch the pingFirmata.ino arduino file and upload it on your board.
+Then the index.js will play its role, which is to set the server and link everything. 
+
+To run the server, you will need to open the command prompt.
+There is an example of path, but type it according to where you pasted the clmtrackr-dev file in your computer.
 
 ```
-until finished
+cd Document/DSAA/TECHNO/clmtrackr-dev
+node index.js
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Then, type localhost:3000 on your web browser.
+Everything works now ! 
 
-## Running the tests
+### Explanations on more specific points
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+The setTimeout function :
 
 ```
-Give an example
+document.addEventListener('DOMContentLoaded', function() {
+					setTimeout(function(){
+				   text = 'Oh, you are here ?! Welcome.';
+					 console.log(text);
+					 speak(text);
+				 },1000);
+				}, false);
 ```
+In this part I needed to have a setTimeout function because I wanted to make the computer speak as soon as the page was loaded. Since there is a lot of thing to load on the page, it wasn't working. Putting a setTimeout function allowed to make sure everything had the time to load before the computer starts speaking. 
 
-### And coding style tests
-
-Explain what these tests test and why
+The name generator :
 
 ```
-Give an example
+function generator2(){
+	 var firstnamelist = ["UX", "Fashion", "Global", "Senior"];
+	 var lastnamelist = ["Student", "Professionnal", "Co-designer"];
+
+	 var random1 = parseInt(Math.random() * firstnamelist.length);
+	var random2 = parseInt(Math.random() * lastnamelist.length);
+
+	var name = firstnamelist[random1] + " " + lastnamelist[random2];
+}
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License.
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
